@@ -16,8 +16,8 @@ class LottoData(models.Model):
 
 class Recommendation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    strategy = models.CharField(max_length=10)  # 사용한 전략 (1, 2)
-    recommended_numbers = models.JSONField()  # 추천 번호 리스트
+    strategy = models.CharField(max_length=10)
+    recommended_numbers = models.JSONField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
