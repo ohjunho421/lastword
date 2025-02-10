@@ -49,4 +49,10 @@ class ChatBotRecommendView(APIView):
             }, status=200)
 
         except Exception as e:
-            return Response({"error": str(e)}, status=500)
+             
+             return Response({"error": str(e)}, status=500)
+
+
+
+class LuckyNumber(APIView):
+    pass
