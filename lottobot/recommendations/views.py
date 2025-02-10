@@ -76,3 +76,8 @@ class UpdateLottoDataView(APIView):
             return JsonResponse({"message": "로또 데이터가 성공적으로 업데이트되었습니다."}, status=201)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
+        
+
+
+class LuckyNumber(APIView):
+    pass
