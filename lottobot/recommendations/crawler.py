@@ -1,22 +1,33 @@
 import requests
 from bs4 import BeautifulSoup
-from .models import LottoData
+from datetime import datetime
 
-def fetch_latest_lotto_data():
-    url = "https://search.naver.com/search.naver?query=로또당첨번호"
+def crawl_latest_lotto():
+    url = "https://search.naver.com/search.naver?where=nexearch&sm=top_sly.hst&fbm=0&acr=1&ie=utf8&query=로또당첨번호"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
 
-    winning_number_div = soup.find("div", class_="winning_number")
-    winning_numbers = [int(span.text) for span in winning_number_div.find_all("span", class_="ball")]
+    # 당첨 번호 크롤링
+    numbers = soup.select(".winning_number .ball")
+    bonus = soup.select_one(".bonus_number .ball")
 
-    bonus_number_div = soup.find("div", class_="bonus_number")
-    bonus_number = int(bonus_number_div.find("span", class_="ball").text)
+    if not numbers or not bonus:
+        raise ValueError("크롤링 실패: 당첨 번호를 가져올 수 없습니다.")
 
-    draw_number = LottoData.objects.count() + 1  # 회차 번호 추정
+    winning_numbers = [int(num.text) for num in numbers]  # 당첨 번호 추출
+    bonus_number = int(bonus.text)  # 보너스 번호 추출
 
+    # 현재 날짜 사용
+    date = datetime.now().strftime("%Y-%m-%d")
+
+    # 데이터 반환
     return {
-        "draw_number": draw_number,
-        "winning_numbers": winning_numbers,
-        "bonus_number": bonus_number,
+        "날짜": date,
+        "번호1": winning_numbers[0],
+        "번호2": winning_numbers[1],
+        "번호3": winning_numbers[2],
+        "번호4": winning_numbers[3],
+        "번호5": winning_numbers[4],
+        "번호6": winning_numbers[5],
+        "보너스": bonus_number,
     }

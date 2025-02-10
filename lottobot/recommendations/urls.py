@@ -1,8 +1,6 @@
 from django.urls import path
-from .views import UpdateLottoDataView, RecommendNumbersView, CheckResultsView
+from .views import ChatBotRecommendView
 
 urlpatterns = [
-    path('update-lotto-data/', UpdateLottoDataView.as_view(), name='update_lotto_data'),
-    path('recommend/<str:strategy>/', RecommendNumbersView.as_view(), name='recommend_numbers'),
-    path('check-results/', CheckResultsView.as_view(), name='check_results'),
+    path('chatbot/', ChatBotRecommendView.as_view(), name='chatbot_recommend'),
 ]

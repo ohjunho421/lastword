@@ -77,6 +77,7 @@ class UpdateLottoDataView(APIView):
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
         
+    return Response({"error": str(e)}, status=500)
 
 
 class LuckyNumber(APIView):
