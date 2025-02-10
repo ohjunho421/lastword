@@ -1,6 +1,10 @@
 #끝말잇기
 코끼리
 리어카
-카센터
-터미널
+asd
+카센
+adssa
+터
+asd
+defasdsa터미널
 dd
